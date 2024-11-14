@@ -12,6 +12,7 @@ const CountdownTimer = () => {
         <Icon name="chevron-right" size={40} color="#61734D" />
       </TimerHeaderWrapper>
       <FoodTitleText>쉬림프 타코</FoodTitleText>
+      <TimerText>999:30</TimerText>
     </TimerContainer>
   );
 };
@@ -52,4 +53,10 @@ const FoodTitleText = styled.Text`
   opacity: 0.5;
   font-weight: bold;
   font-size: 17px;
+`;
+
+const TimerText = styled.Text`
+  padding-top: 2px;
+  font-weight: bold;
+  font-size: 27px;
 `;
