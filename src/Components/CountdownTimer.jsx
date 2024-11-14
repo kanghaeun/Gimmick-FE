@@ -11,6 +11,7 @@ const CountdownTimer = () => {
         </IconboxWrapper>
         <Icon name="chevron-right" size={40} color="#61734D" />
       </TimerHeaderWrapper>
+      <FoodTitleText>쉬림프 타코</FoodTitleText>
     </TimerContainer>
   );
 };
@@ -44,4 +45,11 @@ const IconboxWrapper = styled.View`
 
 const IconView = styled.Text`
   font-size: 24px;
+`;
+
+const FoodTitleText = styled.Text`
+  padding-top: 20px;
+  opacity: 0.5;
+  font-weight: bold;
+  font-size: 17px;
 `;
