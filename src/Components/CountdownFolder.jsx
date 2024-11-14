@@ -7,7 +7,12 @@ const CountdownFolder = () => {
     <CountdownFolderContainer>
       <TopLeftSectionView></TopLeftSectionView>
       <TopRightSectionView></TopRightSectionView>
-      <BottomSectionView></BottomSectionView>
+      <BottomSectionWrapper>
+        <IconboxWrapper>
+          <IconView>🍔</IconView>
+        </IconboxWrapper>
+        <FoodTitleText>쉬림프 타코</FoodTitleText>
+      </BottomSectionWrapper>
     </CountdownFolderContainer>
   );
 };
@@ -15,7 +20,7 @@ const CountdownFolder = () => {
 export default CountdownFolder;
 
 const CountdownFolderContainer = styled.View`
-  padding: 100px;
+  padding: 80px;
 `;
 
 const TopLeftSectionView = styled.View`
@@ -29,7 +34,6 @@ const TopLeftSectionView = styled.View`
 `;
 const TopRightSectionView = styled.View`
   position: absolute;
-
   width: 115px;
   height: 130px;
   background-color: #ffd5d5;
@@ -38,12 +42,33 @@ const TopRightSectionView = styled.View`
   margin-left: 13px;
 `;
 
-const BottomSectionView = styled.View`
+const BottomSectionWrapper = styled.View`
   position: absolute;
-
+  padding: 15px;
   width: 140px;
   height: 113px;
   background-color: #fcc4c4;
   border-radius: 20px;
   bottom: 0;
+`;
+
+const IconboxWrapper = styled.View`
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 13px;
+  opacity: 0.7;
+  justify-content: center;
+  align-items: center;
+`;
+
+const IconView = styled.Text`
+  font-size: 24px;
+`;
+
+const FoodTitleText = styled.Text`
+  padding-top: 17px;
+  opacity: 0.6;
+  font-weight: 900;
+  font-size: 17px;
 `;
