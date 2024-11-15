@@ -21,7 +21,26 @@ const MainPage = () => {
 
 export default MainPage;
 
-const MainContainer = styled.View``;
-const HeaderWrapper = styled.View``;
-const CountdownTimerWrapper = styled.View``;
-const CreateCountdownTimerBtn = styled.View``;
+const MainContainer = styled.View`
+  padding: 20px;
+  flex-direction: column;
+  height: 100%;
+`;
+const HeaderWrapper = styled.View`
+  heigth: 30px;
+  border: solid 1px;
+  flex: 1;
+`;
+const CountdownTimerWrapper = styled.View`
+  padding: 10px;
+  border: solid 1px;
+  flex: 5;
+`;
+const CreateCountdownTimerBtn = styled.View`
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px dashed #3562d6;
+  justify-content: center;
+  align-items: center;
+`;
