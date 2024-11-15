@@ -7,7 +7,6 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
-  margin-top: 25px;
 `;
 
 const Logo = styled.Image`

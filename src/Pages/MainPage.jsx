@@ -3,11 +3,14 @@ import React, {useState} from 'react';
 import CountdownTimer from '../Components/CountdownTimer';
 import CountdownFolder from '../Components/\bCountdownFolder';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Header from '../Components/Header';
 
 const MainPage = () => {
   return (
     <MainContainer>
-      <HeaderWrapper></HeaderWrapper>
+      <HeaderWrapper>
+        <Header type="main" />
+      </HeaderWrapper>
       <CountdownTimerWrapper>
         <CountdownTimer />
         <CountdownFolder />
@@ -28,13 +31,11 @@ const MainContainer = styled.View`
 `;
 const HeaderWrapper = styled.View`
   heigth: 30px;
-  border: solid 1px;
   flex: 1;
 `;
 const CountdownTimerWrapper = styled.View`
   padding: 10px;
-  border: solid 1px;
-  flex: 5;
+  flex: 7;
 `;
 const CreateCountdownTimerBtn = styled.View`
   width: 100%;
