@@ -25,6 +25,7 @@ const TimerContainer = styled.View`
   background-color: #fbdf60;
   border-radius: 20px;
   padding: 15px;
+  margin-bottom: 20px;
 `;
 
 const TimerHeaderWrapper = styled.View`

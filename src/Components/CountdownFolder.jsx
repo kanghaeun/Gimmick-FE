@@ -20,7 +20,8 @@ const CountdownFolder = () => {
 export default CountdownFolder;
 
 const CountdownFolderContainer = styled.View`
-  padding: 80px;
+  padding: 70px;
+  margin-bottom: 20px;
 `;
 
 const TopLeftSectionView = styled.View`
