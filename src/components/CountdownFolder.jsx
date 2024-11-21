@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Entypo';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 
 const CountdownFolder = () => {
   return (
     <CountdownFolderContainer>
-      <TopLeftSectionView></TopLeftSectionView>
-      <TopRightSectionView></TopRightSectionView>
+      <TopLeftSectionView />
+      <TopRightSectionView />
       <BottomSectionWrapper>
         <IconboxWrapper>
           <IconView>🍔</IconView>
@@ -20,56 +21,57 @@ const CountdownFolder = () => {
 export default CountdownFolder;
 
 const CountdownFolderContainer = styled.View`
-  padding: 70px;
-  margin-bottom: 20px;
+  padding: ${scale(70)}px;
+  margin-bottom: ${verticalScale(20)}px;
 `;
 
 const TopLeftSectionView = styled.View`
   position: absolute;
-  width: 70px;
-  height: 140px;
+  width: ${scale(70)}px;
+  height: ${scale(140)}px;
   background-color: #ffd5d5;
-  border-radius: 20px;
+  border-radius: ${moderateScale(15)}px;
   bottom: 0;
-  margin-left: 10px;
+  margin-left: ${scale(10)}px;
 `;
+
 const TopRightSectionView = styled.View`
   position: absolute;
-  width: 115px;
-  height: 130px;
+  width: ${scale(119)}px;
+  height: ${scale(131.5)}px;
   background-color: #ffd5d5;
-  border-radius: 20px;
+  border-radius: ${moderateScale(15)}px;
   bottom: 0;
-  margin-left: 13px;
+  margin-left: ${scale(12)}px;
 `;
 
 const BottomSectionWrapper = styled.View`
   position: absolute;
-  padding: 15px;
-  width: 140px;
-  height: 113px;
+  padding: ${scale(15)}px;
+  width: ${scale(140)}px;
+  height: ${scale(117.5)}px;
   background-color: #fcc4c4;
-  border-radius: 20px;
+  border-radius: ${moderateScale(15)}px;
   bottom: 0;
 `;
 
 const IconboxWrapper = styled.View`
-  width: 40px;
-  height: 40px;
+  width: ${scale(40)}px;
+  height: ${scale(40)}px;
   background-color: #ffffff;
-  border-radius: 13px;
+  border-radius: ${moderateScale(13)}px;
   opacity: 0.7;
   justify-content: center;
   align-items: center;
 `;
 
 const IconView = styled.Text`
-  font-size: 24px;
+  font-size: ${moderateScale(24)}px;
 `;
 
 const FoodTitleText = styled.Text`
-  padding-top: 17px;
+  padding-top: ${verticalScale(23)}px;
   opacity: 0.6;
   font-weight: 900;
-  font-size: 17px;
+  font-size: ${moderateScale(17)}px;
 `;

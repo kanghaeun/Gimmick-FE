@@ -1,22 +1,25 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import Header from '../components/Header';
 import CountdownTimer from '../components/CountdownTimer';
 import CountdownFolder from '../components/CountdownFolder';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Header from '../components/Header';
 
 const MainPage = () => {
+  const timers = Array(3).fill(null);
+  const folders = Array(3).fill(null);
+
   return (
     <MainContainer>
       <HeaderWrapper>
         <Header type="main" />
       </HeaderWrapper>
       <CountdownTimerWrapper>
-        <CountdownTimer />
-        <CountdownFolder />
-        <CreateCountdownTimerBtn>
-          <Icon name="plus" size={25} color="#3562D6" />
-        </CreateCountdownTimerBtn>
+        {timers.map((_, index) => (
+          <CountdownTimer key={`timer-${index}`} />
+        ))}
+        {folders.map((_, index) => (
+          <CountdownFolder key={`folder-${index}`} />
+        ))}
       </CountdownTimerWrapper>
     </MainContainer>
   );
@@ -25,18 +28,22 @@ const MainPage = () => {
 export default MainPage;
 
 const MainContainer = styled.View`
-  padding: 20px;
   flex-direction: column;
   height: 100%;
 `;
+
 const HeaderWrapper = styled.View`
-  heigth: 30px;
   flex: 1;
 `;
+
 const CountdownTimerWrapper = styled.View`
-  padding: 10px;
-  flex: 7;
+  flex: 10;
+  flex-direction: row;
+  gap: ${scale(22)}px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 `;
+
 const CreateCountdownTimerBtn = styled.View`
   width: 100%;
   height: 50px;

@@ -1,32 +1,32 @@
-import React from 'react';
-import {TouchableOpacity, Image, Text} from 'react-native';
 import styled from 'styled-components/native';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import {TouchableOpacity, Image, Text} from 'react-native';
 
 // Styled Components for Header
 const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px;
+  padding: ${moderateScale(7)}px;
 `;
 
 const Logo = styled.Image`
-  width: 90px;
-  height: 30px;
+  width: ${scale(90)}px;
+  height: ${verticalScale(30)}px;
   object-fit: contain;
 `;
 
 const IconContainer = styled.View`
   flex-direction: row;
-  margin-top: 3px;
+  margin-top: ${verticalScale(3)}px;
 `;
 
 const IconButton = styled(TouchableOpacity)`
-  margin-left: ${props => (props.applyMargin ? '14px' : '0px')};
+  margin-left: ${props => (props.applyMargin ? moderateScale(14) : 0)}px;
 `;
 
 const StyledIcon = styled(Image)`
-  width: 24px;
-  height: 24px;
+  width: ${moderateScale(24)}px;
+  height: ${moderateScale(24)}px;
 `;
 
 const BackButtonIcon = styled(StyledIcon)`
@@ -34,7 +34,7 @@ const BackButtonIcon = styled(StyledIcon)`
 `;
 
 const TitleText = styled(Text)`
-  font-size: 20px;
+  font-size: ${moderateScale(20)}px;
   font-weight: bold;
 `;
 
