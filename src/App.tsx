@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import ForderCreateModal from './pages/FolderCreateModal';
-import CreateSelectModal from './pages/CreateSelectModal';
+import CreateSelectModal from './components/modal/createSelectModal/CreateSelectModal';
 import MainPage from './pages/MainPage';
 
 function App(): React.JSX.Element {

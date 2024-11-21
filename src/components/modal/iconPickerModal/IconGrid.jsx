@@ -1,7 +1,6 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import foodIconsObjectArray from '../assets/IconList';
 import {useState} from 'react';
+import styled from 'styled-components/native';
+import foodIconsObjectArray from '../../../assets/IconList';
 
 const IconGrid = () => {
   const [setIcon, setSelectedIcon] = useState('0');

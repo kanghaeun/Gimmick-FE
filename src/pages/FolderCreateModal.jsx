@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import styled from 'styled-components/native';
-import ColorPicker from '../components/ColorPicker';
-import RegistrationButton from '../components/RegistrationButton';
-import InputComponent from '../components/InputComponent';
-import IconPicker from '../components/IconPicker';
-import CloseButton from '../components/CloseButton';
+import {useState} from 'react';
 import {Modal} from 'react-native';
+import styled from 'styled-components/native';
+import ColorPicker from '../components/common/ColorPicker';
+import RegistrationButton from '../components/folderCreate/RegistrationButton';
+import InputComponent from '../components/folderCreate/InputComponent';
+import IconPicker from '../components/modal/iconPickerModal/IconPicker';
+import CloseButton from '../components/common/CloseButton';
 
 const ForderCreateModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);

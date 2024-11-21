@@ -1,6 +1,5 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const BackButtom = ({style}) => {
   const back = () => {

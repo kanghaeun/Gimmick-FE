@@ -42,14 +42,14 @@ const Header = ({type}) => {
   if (type === 'main') {
     return (
       <HeaderContainer>
-        <Logo source={require('../assets/images/header/logo.png')} />
+        <Logo source={require('../../assets/images/header/logo.png')} />
         <IconContainer>
           <IconButton
             onPress={() => {
               //TODO: 즐겨찾기 버튼
             }}>
             <StyledIcon
-              source={require('../assets/images/header/heart-icon.png')}
+              source={require('../../assets/images/header/heart-icon.png')}
             />
           </IconButton>
           <IconButton
@@ -58,7 +58,7 @@ const Header = ({type}) => {
               //TODO: 새로 만들기 버튼
             }}>
             <StyledIcon
-              source={require('../assets/images/header/pencil-icon.png')}
+              source={require('../../assets/images/header/pencil-icon.png')}
             />
           </IconButton>
           <IconButton
@@ -67,7 +67,7 @@ const Header = ({type}) => {
               //TODO: 설정 버튼
             }}>
             <StyledIcon
-              source={require('../assets/images/header/settings-icon.png')}
+              source={require('../../assets/images/header/settings-icon.png')}
             />
           </IconButton>
         </IconContainer>
@@ -81,7 +81,7 @@ const Header = ({type}) => {
             //TODO: 뒤로가기 버튼
           }}>
           <BackButtonIcon
-            source={require('../assets/images/header/back-icon.png')}
+            source={require('../../assets/images/header/back-icon.png')}
           />
         </IconButton>
         <TitleText>타이머 제목</TitleText>
@@ -90,7 +90,7 @@ const Header = ({type}) => {
             //TODO: 즐겨찾기 버튼
           }}>
           <StyledIcon
-            source={require('../assets/images/header/heart-icon.png')}
+            source={require('../../assets/images/header/heart-icon.png')}
           />
         </IconButton>
       </HeaderContainer>

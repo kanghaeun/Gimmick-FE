@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import React from 'react';
-import Icon from 'react-native-vector-icons/Entypo';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 
 const CountdownFolder = () => {

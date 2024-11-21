@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Modal} from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import CloseButton from '../components/CloseButton';
-import CreateButton from '../components/CreateButton';
+import CloseButton from '../../common/CloseButton';
+import CreateButton from './CreateButton';
 
 const CreateSelectModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);

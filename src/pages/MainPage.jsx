@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
-import Header from '../components/Header';
-import CountdownTimer from '../components/CountdownTimer';
-import CountdownFolder from '../components/CountdownFolder';
+import Header from '../components/common/Header';
+import CountdownTimer from '../components/timer/CountdownTimer';
+import CountdownFolder from '../components/timer/CountdownFolder';
 
 const MainPage = () => {
   const timers = Array(3).fill(null);

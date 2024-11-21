@@ -1,6 +1,5 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const CloseButton = ({style}) => {
   const close = () => {
