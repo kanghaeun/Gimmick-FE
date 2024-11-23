@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Entypo';
-
+import CustomText from '../CustomText';
 const CountdownTimer = () => {
   return (
     <TimerContainer>
@@ -11,8 +11,8 @@ const CountdownTimer = () => {
         </IconboxWrapper>
         <Icon name="chevron-right" size={moderateScale(40)} color="#61734D" />
       </TimerHeaderWrapper>
-      <FoodTitleText>쉬림프 타코</FoodTitleText>
-      <TimerText>12:30</TimerText>
+      <FoodTitleText weight="semi-bold">쉬림프 타코</FoodTitleText>
+      <TimerText weight="bold">12:30</TimerText>
     </TimerContainer>
   );
 };
@@ -25,7 +25,6 @@ const TimerContainer = styled.View`
   background-color: #fbdf60;
   border-radius: ${moderateScale(20)}px;
   padding: ${scale(15)}px;
-  margin-bottom: ${scale(20)}px;
 `;
 
 const TimerHeaderWrapper = styled.View`
@@ -45,19 +44,17 @@ const IconboxWrapper = styled.View`
   align-items: center;
 `;
 
-const IconView = styled.Text`
+const IconView = styled(CustomText)`
   font-size: ${moderateScale(24)}px;
 `;
 
-const FoodTitleText = styled.Text`
+const FoodTitleText = styled(CustomText)`
   padding-top: ${verticalScale(18)}px;
   opacity: 0.5;
-  font-weight: bold;
   font-size: ${moderateScale(17)}px;
 `;
 
-const TimerText = styled.Text`
+const TimerText = styled(CustomText)`
   padding-top: ${verticalScale(1)}px;
-  font-weight: bold;
   font-size: ${moderateScale(33)}px;
 `;

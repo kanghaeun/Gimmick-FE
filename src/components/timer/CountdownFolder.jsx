@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import CustomText from '../CustomText';
 
 const CountdownFolder = () => {
   return (
@@ -10,7 +11,7 @@ const CountdownFolder = () => {
         <IconboxWrapper>
           <IconView>🍔</IconView>
         </IconboxWrapper>
-        <FoodTitleText>쉬림프 타코</FoodTitleText>
+        <FoodTitleText weight="bold">쉬림프 타코</FoodTitleText>
       </BottomSectionWrapper>
     </CountdownFolderContainer>
   );
@@ -20,7 +21,6 @@ export default CountdownFolder;
 
 const CountdownFolderContainer = styled.View`
   padding: ${scale(70)}px;
-  margin-bottom: ${verticalScale(20)}px;
 `;
 
 const TopLeftSectionView = styled.View`
@@ -63,13 +63,12 @@ const IconboxWrapper = styled.View`
   align-items: center;
 `;
 
-const IconView = styled.Text`
+const IconView = styled(CustomText)`
   font-size: ${moderateScale(24)}px;
 `;
 
-const FoodTitleText = styled.Text`
+const FoodTitleText = styled(CustomText)`
   padding-top: ${verticalScale(23)}px;
   opacity: 0.6;
-  font-weight: 900;
   font-size: ${moderateScale(17)}px;
 `;
