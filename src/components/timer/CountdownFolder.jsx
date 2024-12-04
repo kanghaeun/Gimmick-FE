@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import CustomText from '../CustomText';
+import {Platform} from 'react-native';
 
 const CountdownFolder = () => {
   return (
@@ -64,11 +65,11 @@ const IconboxWrapper = styled.View`
 `;
 
 const IconView = styled(CustomText)`
-  font-size: ${moderateScale(24)}px;
+  font-size: ${Platform.select({ios: scale(24), android: scale(21)})}px;
 `;
 
 const FoodTitleText = styled(CustomText)`
-  padding-top: ${verticalScale(23)}px;
+  padding-top: ${Platform.select({ios: scale(23), android: scale(21)})}px;
   opacity: 0.6;
   font-size: ${moderateScale(17)}px;
 `;
