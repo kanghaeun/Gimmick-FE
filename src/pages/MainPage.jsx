@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import {ScrollView} from 'react-native';
 import Header from '../components/common/Header';
 import CountdownTimer from '../components/timer/CountdownTimer';
 import CountdownFolder from '../components/timer/CountdownFolder';
 
 const MainPage = () => {
-  const timers = Array(3).fill(null);
+  const timers = Array(30).fill(null);
   const folders = Array(3).fill(null);
 
   return (
@@ -15,12 +16,18 @@ const MainPage = () => {
         <Header type="main" />
       </HeaderWrapper>
       <CountdownTimerWrapper>
-        {timers.map((_, index) => (
-          <CountdownTimer key={`timer-${index}`} />
-        ))}
-        {folders.map((_, index) => (
-          <CountdownFolder key={`folder-${index}`} />
-        ))}
+        <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
+          showsVerticalScrollIndicator={false}>
+          <TimersAndFoldersContainer>
+            {timers.map((_, index) => (
+              <CountdownTimer key={`timer-${index}`} />
+            ))}
+            {folders.map((_, index) => (
+              <CountdownFolder key={`folder-${index}`} />
+            ))}
+          </TimersAndFoldersContainer>
+        </ScrollView>
       </CountdownTimerWrapper>
     </MainContainer>
   );
@@ -39,6 +46,9 @@ const HeaderWrapper = styled.View`
 
 const CountdownTimerWrapper = styled.View`
   flex: 10;
+`;
+
+const TimersAndFoldersContainer = styled.View`
   flex-direction: row;
   gap: ${scale(22)}px;
   flex-wrap: wrap;
