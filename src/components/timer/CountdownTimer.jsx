@@ -11,7 +11,7 @@ const CountdownTimer = () => {
         <IconboxWrapper>
           <IconView>🍔</IconView>
         </IconboxWrapper>
-        <Icon name="chevron-right" size={moderateScale(40)} color="#61734D" />
+        <Icon name="chevron-right" size={scale(40)} color="#61734D" />
       </TimerHeaderWrapper>
       <FoodTitleText weight="semi-bold">쉬림프 타코</FoodTitleText>
       <TimerText weight="bold">12:30</TimerText>
@@ -32,7 +32,6 @@ const TimerContainer = styled.View`
 const TimerHeaderWrapper = styled.View`
   font-size: ${scale(24)}px;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -42,6 +41,7 @@ const IconboxWrapper = styled.View`
   background-color: #ffffff;
   border-radius: ${scale(13)}px;
   opacity: 0.7;
+  margin-right: ${scale(38)}px;
   justify-content: center;
   align-items: center;
 `;
@@ -58,5 +58,6 @@ const FoodTitleText = styled(CustomText)`
 
 const TimerText = styled(CustomText)`
   margin-top: ${Platform.select({ios: scale(1), android: scale(-4)})}px;
-  font-size: ${scale(33)}px;
+  font-size: ${scale(31)}px;
+  margin-left: ${scale(-1)}px;
 `;
