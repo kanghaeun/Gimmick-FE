@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from 'react';
 import {scale} from 'react-native-size-matters';
 import CustomText from '../CustomText';
-
 import styled from 'styled-components/native';
 
 const CurrentFire = () => {
@@ -19,17 +17,17 @@ export default CurrentFire;
 
 const CurrentFireContainer = styled.View`
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: ${scale(30)}px;
+  margin-bottom: ${scale(20)}px;
 `;
 
 const FireText = styled(CustomText)`
-  font-size: 18px;
+  font-size: ${scale(18)}px;
   color: #fff;
 `;
 
 const FireWrapper = styled.View`
   background-color: #ffa034;
-  padding: 5px 23px;
-  border-radius: 11px;
+  padding: ${scale(5)}px ${scale(23)}px;
+  border-radius: ${scale(11)}px;
 `;
