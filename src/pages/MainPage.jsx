@@ -7,7 +7,7 @@ import CountdownTimer from '../components/timer/CountdownTimer';
 import CountdownFolder from '../components/timer/CountdownFolder';
 
 const MainPage = () => {
-  const timers = Array(6).fill(null);
+  const timers = Array(3).fill(null);
   const folders = Array(3).fill(null);
 
   return (
@@ -38,13 +38,11 @@ const MainContainer = styled.View`
   height: 100%;
 `;
 
-const CountdownTimerWrapper = styled.View`
-  margin-top: ${scale(0)}px;
-`;
+const CountdownTimerWrapper = styled.View``;
 
 const TimersAndFoldersContainer = styled.View`
   flex-direction: row;
-  gap: ${scale(22)}px;
+  gap: ${scale(26)}px;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding-top: ${scale(20)}px;

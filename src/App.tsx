@@ -92,6 +92,6 @@ const FolderCreateWithLayout = () => (
 export default App;
 
 const BaseLayout = styled.View`
-  padding: 0 ${scale(22)}px;
+  padding: 0 ${scale(21)}px;
   padding-top: ${Platform.select({ios: scale(25), android: scale(12)})}px;
 `;
