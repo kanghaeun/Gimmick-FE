@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import {scale} from 'react-native-size-matters';
-import Icon from 'react-native-vector-icons/Entypo';
 import CustomText from '../CustomText';
 import {Platform, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -17,9 +16,11 @@ const CountdownTimer = () => {
           <IconboxWrapper>
             <IconView>🍔</IconView>
           </IconboxWrapper>
-          <Icon name="chevron-right" size={scale(40)} color="#61734D" />
+          <EnterImage
+            source={require('../../assets/images/timerBox/enter-arrow.png')}
+          />
         </TimerHeaderWrapper>
-        <FoodTitleText weight="semi-bold">쉬림프 타코</FoodTitleText>
+        <FoodTitleText weight="semi-bold">고구마 삶기</FoodTitleText>
         <TimerText weight="bold">
           {String(time.minutes).padStart(2, '0')}:
           {String(time.seconds).padStart(2, '0')}
@@ -33,9 +34,9 @@ export default CountdownTimer;
 
 const TimerContainer = styled.View`
   width: ${scale(140)}px;
-  height: ${scale(140)}px;
+  height: ${scale(134.7)}px;
   background-color: #fbdf60;
-  border-radius: ${scale(20)}px;
+  border-radius: ${scale(13)}px;
   padding: ${scale(15)}px;
 `;
 
@@ -51,7 +52,7 @@ const IconboxWrapper = styled.View`
   background-color: #ffffff;
   border-radius: ${scale(13)}px;
   opacity: 0.7;
-  margin-right: ${scale(38)}px;
+  margin-right: ${scale(54)}px;
   justify-content: center;
   align-items: center;
 `;
@@ -70,4 +71,9 @@ const TimerText = styled(CustomText)`
   margin-top: ${Platform.select({ios: scale(1), android: scale(-4)})}px;
   font-size: ${scale(31)}px;
   margin-left: ${scale(-1)}px;
+`;
+
+const EnterImage = styled.Image`
+  width: 15px;
+  height: 25px;
 `;
