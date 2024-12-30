@@ -21,13 +21,14 @@ const CountdownFolder = () => {
 export default CountdownFolder;
 
 const CountdownFolderContainer = styled.View`
-  padding: ${scale(70)}px;
+  width: ${scale(140)}px;
+  height: ${scale(134.7)}px;
 `;
 
 const TopLeftSectionView = styled.View`
   position: absolute;
   width: ${scale(70)}px;
-  height: ${scale(140)}px;
+  height: ${scale(134.7)}px;
   background-color: #ffd5d5;
   border-radius: ${scale(15)}px;
   bottom: 0;
@@ -37,7 +38,7 @@ const TopLeftSectionView = styled.View`
 const TopRightSectionView = styled.View`
   position: absolute;
   width: ${scale(119)}px;
-  height: ${scale(131.5)}px;
+  height: ${scale(126.5)}px;
   background-color: #ffd5d5;
   border-radius: ${scale(15)}px;
   bottom: 0;
@@ -48,7 +49,7 @@ const BottomSectionWrapper = styled.View`
   position: absolute;
   padding: ${scale(15)}px;
   width: ${scale(140)}px;
-  height: ${scale(117.5)}px;
+  height: ${scale(113)}px;
   background-color: #fcc4c4;
   border-radius: ${scale(15)}px;
   bottom: 0;
@@ -56,7 +57,7 @@ const BottomSectionWrapper = styled.View`
 
 const IconboxWrapper = styled.View`
   width: ${scale(40)}px;
-  height: ${scale(40)}px;
+  height: ${scale(38.5)}px;
   background-color: #ffffff;
   border-radius: ${scale(13)}px;
   opacity: 0.7;
