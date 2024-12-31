@@ -7,6 +7,7 @@ import CountdownTimer from '../components/timer/CountdownTimer';
 import CountdownFolder from '../components/timer/CountdownFolder';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
+import initialMockData from '../data/initialMockData';
 
 const MainPage = () => {
   const [timers, setTimers] = useState([]);
@@ -33,6 +34,26 @@ const MainPage = () => {
       loadData();
     }, []),
   );
+  const [mockData, setMockData] = useState([]);
+
+  useEffect(() => {
+    // initialMockData 저장하기
+    AsyncStorage.setItem(
+      'initialMockData',
+      JSON.stringify(initialMockData),
+      () => {
+        console.log('유저정보 저장 완료');
+      },
+    );
+
+    // 저장된 데이터를 AsyncStorage에서 가져오기
+    AsyncStorage.getItem('initialMockData', (err, result) => {
+      const storedData = JSON.parse(result);
+      if (storedData) {
+        setMockData(storedData);
+      }
+    });
+  }, []);
 
   return (
     <MainContainer>

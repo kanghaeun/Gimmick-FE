@@ -4,6 +4,7 @@ import CustomText from '../CustomText';
 import {Platform, TouchableWithoutFeedback} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import useTimerStore from '../../store';
+import {View} from 'react-native';
 
 const CountdownTimer = ({timer}) => {
   const navigation = useNavigation();
