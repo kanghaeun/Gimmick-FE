@@ -42,7 +42,7 @@ const CircularProgress = ({icon, color}) => {
         {circles}
       </Svg>
       <ImageContainer>
-        <A>{icon}</A>
+        <FoodText>{icon}</FoodText>
         {/* <FoodImage
           source={require('../../assets/images/detail/food-image.png')}
         /> */}
@@ -53,9 +53,6 @@ const CircularProgress = ({icon, color}) => {
 
 export default CircularProgress;
 
-const A = styled.Text`
-  font-size: 125px;
-`;
 const Container = styled.View`
   justify-content: center;
   align-items: center;
@@ -67,6 +64,10 @@ const ImageContainer = styled.View`
   position: absolute;
   justify-content: center;
   align-items: center;
+`;
+
+const FoodText = styled.Text`
+  font-size: 125px;
 `;
 
 const FoodImage = styled.Image`
