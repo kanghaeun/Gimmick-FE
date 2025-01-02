@@ -25,7 +25,7 @@ const initialMockData = [
   {
     timerName: '고구마 삶기',
     icon: '🍠',
-    timerColor: '#fbdf60',
+    timerColor: '#FBDF60',
     totalMinutes: '20',
     totalSeconds: '00',
     detailTimerData: [
@@ -46,7 +46,7 @@ const initialMockData = [
     ],
   },
   {
-    timerName: '파스타 (알텐테)',
+    timerName: '파스타 (알덴테)',
     icon: '🍝',
     timerColor: '#BAE2FF',
     totalMinutes: '5',
