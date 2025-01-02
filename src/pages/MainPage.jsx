@@ -37,17 +37,12 @@ const MainPage = () => {
   const [mockData, setMockData] = useState([]);
 
   useEffect(() => {
-    // initialMockData 저장하기
-    AsyncStorage.setItem(
-      'initialMockData',
-      JSON.stringify(initialMockData),
-      () => {
-        console.log('유저정보 저장 완료');
-      },
-    );
+    AsyncStorage.setItem('timers', JSON.stringify(initialMockData), () => {
+      console.log('유저정보 저장 완료');
+    });
 
     // 저장된 데이터를 AsyncStorage에서 가져오기
-    AsyncStorage.getItem('initialMockData', (err, result) => {
+    AsyncStorage.getItem('timers', (err, result) => {
       const storedData = JSON.parse(result);
       if (storedData) {
         setMockData(storedData);
