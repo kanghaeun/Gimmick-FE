@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
 import Svg, {Circle} from 'react-native-svg';
 import {scale} from 'react-native-size-matters';
 import styled from 'styled-components/native';
 
-const CircularProgress = () => {
+const CircularProgress = ({icon, color}) => {
   const radius = scale(110); // 큰 원의 반지름
-  const smallCircleRadius = scale(6); // 작은 원의 반지름
+  const smallCircleRadius = scale(6.5); // 작은 원의 반지름
   const circleCount = 8; // 작은 원의 개수
   const angleStep = (2 * Math.PI) / circleCount; // 각도 계산
 
@@ -15,7 +14,7 @@ const CircularProgress = () => {
     const x = radius + radius * Math.cos(angle); // x 좌표
     const y = radius + radius * Math.sin(angle); // y 좌표
     return (
-      <Circle key={index} cx={x} cy={y} r={smallCircleRadius} fill="#f0c078" />
+      <Circle key={index} cx={x} cy={y} r={smallCircleRadius} fill={color} />
     );
   });
 
@@ -34,7 +33,7 @@ const CircularProgress = () => {
           cx={radius} // 큰 원의 중심을 SVG 중앙에 맞추기
           cy={radius} // 큰 원의 중심을 SVG 중앙에 맞추기
           r={radius}
-          stroke="#FFC15B"
+          stroke={color}
           opacity={'64%'}
           strokeWidth="3"
           fill="none"
@@ -43,9 +42,10 @@ const CircularProgress = () => {
         {circles}
       </Svg>
       <ImageContainer>
-        <FoodImage
+        <A>{icon}</A>
+        {/* <FoodImage
           source={require('../../assets/images/detail/food-image.png')}
-        />
+        /> */}
       </ImageContainer>
     </Container>
   );
@@ -53,6 +53,9 @@ const CircularProgress = () => {
 
 export default CircularProgress;
 
+const A = styled.Text`
+  font-size: 125px;
+`;
 const Container = styled.View`
   justify-content: center;
   align-items: center;

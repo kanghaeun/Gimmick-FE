@@ -9,13 +9,22 @@ import useTimerStore from '../store';
 import {TouchableWithoutFeedback} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 
+const DetailColor = color => {
+  if (color === '#FBDF60') return '#FFC15B';
+  if (color === '#FCC4C4') return '#FFAAAA';
+  if (color === '#61734D') return '#A8D96F';
+  if (color === '#BAE2FF') return '#90CFFF';
+  if (color === '#F6DBB7') return '#E9B97E';
+};
+
 const DetailPage = () => {
   const route = useRoute();
   const {timer} = route.params || {};
-  console.log(timer);
   const {time, isRunning, startTimer, stopTimer, resetTimer} = useTimerStore(
     state => state,
   );
+
+  const detailColor = DetailColor(timer.timerColor);
 
   const handleTimerToggle = () => {
     if (isRunning) {
@@ -31,7 +40,7 @@ const DetailPage = () => {
         <Header type="detail" title={timer.timerName} />
       </HeaderWrapper>
       <ContentContainer>
-        <CircularProgress />
+        <CircularProgress icon={timer.icon} color={detailColor} />
         <CurrentFire />
         <TimerDisplay weight="semi-bold">
           {String(time.minutes).padStart(2, '0')}:
@@ -39,14 +48,14 @@ const DetailPage = () => {
         </TimerDisplay>
         <ButtonContainer>
           <TouchableWithoutFeedback onPress={resetTimer}>
-            <ButtonWrapper>
+            <ButtonWrapper color={detailColor}>
               <ResetButtonImage
                 source={require('../assets/images/detail/reset-icon.png')}
               />
             </ButtonWrapper>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={handleTimerToggle}>
-            <ButtonWrapper>
+            <ButtonWrapper color={detailColor}>
               <StartButtonImage
                 source={
                   isRunning
@@ -99,7 +108,8 @@ const ButtonContainer = styled.View`
 
 const ButtonWrapper = styled.View`
   padding: ${scale(12)}px ${scale(40)}px;
-  background-color: #ffc15b;
+  background-color: ${props => props.color};
+  opacity: 0.9;
   border-radius: ${scale(12)}px;
   margin: ${scale(0)}px ${scale(10)}px;
   flex-direction: row;
