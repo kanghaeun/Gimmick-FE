@@ -12,9 +12,9 @@ import {useRoute} from '@react-navigation/native';
 const DetailColor = color => {
   if (color === '#FBDF60') return '#FFC15B';
   if (color === '#F6DBB7') return '#E9B97E';
-  if (color === '#BAE2FF') return '#90CFFF';
-  if (color === '#C8E7A7') return '#A8D96F';
-  if (color === '#FCC4C4') return '#FFAAAA';
+  if (color === '#FFC15B') return '#FFB347';
+  if (color === '#C8E7A7') return '#93C572';
+  if (color === '#FCC4C4') return '#F4A7A3';
 };
 
 const DetailPage = () => {
