@@ -11,7 +11,6 @@ import initialMockData from '../data/initialMockData';
 import {checkFirstUser} from '../utils/checkFirstUser';
 
 const MainPage = () => {
-  const [isFirstUser, setIsFirstUser] = useState(false);
   const [timers, setTimers] = useState([]);
   const [folders, setFolders] = useState([]);
 
@@ -26,24 +25,19 @@ const MainPage = () => {
     }
   };
 
+  // 첫 유저 판별 로직
   useEffect(() => {
     const initialize = async () => {
-      const firstUser = await checkFirstUser();
-      setIsFirstUser(firstUser);
+      try {
+        const firstUser = await checkFirstUser();
 
-      if (isFirstUser) {
-        try {
+        if (firstUser) {
           await AsyncStorage.setItem('timers', JSON.stringify(initialMockData));
-          const storedMockData = await AsyncStorage.getItem('timers');
-          if (storedMockData) {
-            setTimers(JSON.parse(storedMockData));
-          }
-        } catch (error) {
-          console.error('Mock data 저장 실패:', error);
+          setTimers(initialMockData);
         }
+      } catch (error) {
+        console.error('초기화 실패:', error);
       }
-
-      await loadData();
     };
 
     initialize();
