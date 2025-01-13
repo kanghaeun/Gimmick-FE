@@ -34,6 +34,10 @@ const MainPage = () => {
       if (isFirstUser) {
         try {
           await AsyncStorage.setItem('timers', JSON.stringify(initialMockData));
+          const storedMockData = await AsyncStorage.getItem('timers');
+          if (storedMockData) {
+            setTimers(JSON.parse(storedMockData));
+          }
         } catch (error) {
           console.error('Mock data 저장 실패:', error);
         }
