@@ -51,7 +51,7 @@ const initialMockData = [
     id: 3,
     timerName: '파스타 (알덴테)',
     icon: '🍝',
-    timerColor: '#FFC15B',
+    timerColor: '#BAE2FF',
     totalMinutes: '5',
     totalSeconds: '30',
     detailTimerData: [
