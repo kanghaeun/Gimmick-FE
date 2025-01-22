@@ -6,8 +6,31 @@ const useTimerStore = create(set => ({
 
   initTimer: (timerId, initialMinutes, initialSeconds, detailTimerData) => {
     set(state => {
-      if (state.timers[timerId] && state.timers[timerId].isRunning) {
+      // 이미 실행 중인 타이머는 건드리지 않음
+      if (state.timers[timerId]?.isRunning) {
         return state;
+      }
+
+      // 이미 존재하는 타이머의 경우, 중지된 상태라면 시간만 업데이트
+      if (state.timers[timerId]) {
+        return {
+          timers: {
+            ...state.timers,
+            [timerId]: {
+              ...state.timers[timerId],
+              time: {
+                minutes: parseInt(initialMinutes),
+                seconds: parseInt(initialSeconds),
+              },
+              totalTime: {
+                minutes: parseInt(initialMinutes),
+                seconds: parseInt(initialSeconds),
+              },
+              remainingTotalSeconds:
+                parseInt(initialMinutes) * 60 + parseInt(initialSeconds),
+            },
+          },
+        };
       }
 
       const defaultTimer = {
@@ -50,9 +73,14 @@ const useTimerStore = create(set => ({
   startTimer: timerId => {
     set(state => {
       const timer = state.timers[timerId];
-      if (!timer) return state;
+      if (!timer || (timer.isRunning && timer.intervalId)) return state;
 
-      if (timer.isRunning && timer.intervalId) return state;
+      // 현재 상태를 저장
+      const currentState = {
+        time: {...timer.time},
+        remainingTotalSeconds: timer.remainingTotalSeconds,
+        currentStepIndex: timer.currentStepIndex,
+      };
 
       const intervalId = setInterval(() => {
         set(state => {
@@ -79,8 +107,8 @@ const useTimerStore = create(set => ({
             });
 
             if (
-              currentTimer.currentStepIndex <
-              currentTimer.detailTimerData.length - 1
+              (currentTimer.currentStepIndex,
+              currentTimer.detailTimerData.length - 1)
             ) {
               const nextIndex = currentTimer.currentStepIndex + 1;
               const nextStep = currentTimer.detailTimerData[nextIndex];
@@ -177,9 +205,13 @@ const useTimerStore = create(set => ({
   stopTimer: timerId => {
     set(state => {
       const timer = state.timers[timerId];
+      if (!timer) return state;
+
       if (timer?.intervalId) {
         clearInterval(timer.intervalId);
       }
+
+      // 현재 타이머의 상태를 유지하면서 실행만 중지
       return {
         timers: {
           ...state.timers,
@@ -187,6 +219,9 @@ const useTimerStore = create(set => ({
             ...timer,
             isRunning: false,
             intervalId: null,
+            time: timer.time,
+            remainingTotalSeconds: timer.remainingTotalSeconds,
+            currentStepIndex: timer.currentStepIndex,
           },
         },
       };
