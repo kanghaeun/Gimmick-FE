@@ -50,8 +50,8 @@ const CircularProgress = ({icon, color, progress}) => {
   return (
     <Container>
       <Svg
-        height={radius * 2.2}
-        width={radius * 2.2}
+        height={`${radius * 2.2}px`}
+        width={`${radius * 2.2}px`}
         viewBox={`-${radius * 0.1} -${radius * 0.1} ${radius * 2.2} ${
           radius * 2.2
         }`}>
