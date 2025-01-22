@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import { Dimensions } from 'react-native';
+import {Platform, Dimensions} from 'react-native';
 import CurrentFire from '../components/detail/CurrentFire';
 import CurrentMemo from '../components/detail/CurrentMemo';
 import CircularProgress from '../components/detail/CircularProgress';
@@ -11,8 +11,12 @@ import useTimerStore from '../store';
 import {TouchableWithoutFeedback} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {GestureDetector, Gesture} from 'react-native-gesture-handler';
-import Animated, {useSharedValue, withSpring, useAnimatedStyle, runOnJS} from 'react-native-reanimated';
-
+import Animated, {
+  useSharedValue,
+  withSpring,
+  useAnimatedStyle,
+  runOnJS,
+} from 'react-native-reanimated';
 
 const DetailColor = color => {
   if (color === '#FBDF60') return '#FFC15B';
@@ -22,16 +26,12 @@ const DetailColor = color => {
   if (color === '#FCC4C4') return '#F4A7A3';
 };
 
-
-
 const DetailPage = () => {
-  const [isSwifeOpen, setSwifeOpen] =useState(false);
-
+  const [isSwifeOpen, setSwifeOpen] = useState(false);
   const route = useRoute();
   const {timer} = route.params || {};
   const timerStore = useTimerStore();
   const currentTimer = useTimerStore(state => state.timers[timer.id]);
-
 
   const detailColor = DetailColor(timer.timerColor);
 
@@ -77,46 +77,33 @@ const DetailPage = () => {
     return timer.detailTimerData[currentTimer.currentStepIndex].memoData;
   };
 
-
   const translateY = useSharedValue(0);
   const [isGestureActive, setGestureActive] = useState(false);
 
   const panGesture = Gesture.Pan()
-    .onUpdate((event) => {
-      if (isGestureActive) return;
-
-      if (!isSwifeOpen && event.translationY <= 0 && translateY.value > -350) {
+    .onUpdate(event => {
+      if (event.translationY <= 0) {
         translateY.value = event.translationY;
       }
-      else if (isSwifeOpen && event.translationY < 0) {
-        translateY.value = -350 + event.translationY;
-      }
-      
     })
-    .onEnd((event) => {
-      runOnJS(setGestureActive)(true);
-      if (!isSwifeOpen) {
-        if (translateY.value < 0 && translateY.value > -350 && event.translationY < 0) {
-          runOnJS(setSwifeOpen)(true);
-          translateY.value = withSpring(-350, { damping: 40, stiffness: 150 });
-        } 
-      } else if (translateY.value <= -300) {
-          if (event.translationY > 0) {
-            runOnJS(setSwifeOpen)(false);
-            translateY.value = withSpring(0 , { damping: 40, stiffness: 150 });
-          }
-
-          if (event.translationY < 0 ) {
-            translateY.value = withSpring(-350, { damping: 40, stiffness: 150 });
-          }
+    .onEnd(() => {
+      if (translateY.value <= 0 && translateY.value >= -350) {
+        runOnJS(setSwifeOpen)(false);
+        translateY.value = withSpring(0, {damping: 40, stiffness: 150});
+      } else {
+        runOnJS(setSwifeOpen)(true);
+        translateY.value = withSpring(-350, {damping: 40, stiffness: 150});
       }
-      runOnJS(setGestureActive)(false);
-
     });
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{translateY: translateY.value}],
   }));
+
+  const handleTextLayout = event => {
+    const {width} = event.nativeEvent.layout;
+    setTextWidth(width);
+  };
 
   const screenWidth = Dimensions.get('window').width;
 
@@ -125,65 +112,73 @@ const DetailPage = () => {
       <GestureDetector gesture={panGesture}>
         <Animated.View style={animatedStyle}>
           <DetailTimerContainer>
-          <HeaderWrapper>
-            <Header type="detail" title={timer.timerName} timer={timer} />
-          </HeaderWrapper>
-          <ContentContainer>
-            <CircularProgress
-              icon={timer.icon}
-              color={detailColor}
-              progress={calculateProgress()}
-            />
-            <CurrentFire fireData={getCurrentFireData()} />
-            <TimerDisplay weight="semi-bold">
-              {String(currentTimer.time.minutes).padStart(2, '0')}:
-              {String(currentTimer.time.seconds).padStart(2, '0')}
-            </TimerDisplay>
-            <ButtonContainer>
-              <TouchableWithoutFeedback onPress={handleReset}>
-                <ButtonWrapper color={detailColor}>
-                  <ResetButtonImage
-                    source={require('../assets/images/detail/reset-icon.png')}
-                  />
-                </ButtonWrapper>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={handleTimerToggle}>
-                <ButtonWrapper color={detailColor}>
-                  <StartButtonImage
-                    source={
-                      currentTimer.isRunning
-                        ? require('../assets/images/detail/stop-icon.png')
-                        : require('../assets/images/detail/start-icon.png')
-                    }
-                  />
-                </ButtonWrapper>
-              </TouchableWithoutFeedback>
-            </ButtonContainer>
-          </ContentContainer>
-          <SwifeContainer>
-            <SwifeButtonImage
-              source={ isSwifeOpen
-                ? require('../assets/images/detail/swife-arrow-bottom.png')
-                : require('../assets/images/detail/swife-arrow-top.png')}
-            />
-            <SwifeText weight="semi-bold">스와이프하여 전체 정보 확인</SwifeText>
-          </SwifeContainer>
+            <HeaderWrapper>
+              <Header type="detail" title={timer.timerName} timer={timer} />
+            </HeaderWrapper>
+            <ContentContainer>
+              <CircularProgress
+                icon={timer.icon}
+                color={detailColor}
+                progress={calculateProgress()}
+              />
+              <CurrentFire fireData={getCurrentFireData()} />
+              <TimerDisplay weight="semi-bold">
+                {String(currentTimer.time.minutes).padStart(2, '0')}:
+                {String(currentTimer.time.seconds).padStart(2, '0')}
+              </TimerDisplay>
+              <ButtonContainer>
+                <TouchableWithoutFeedback onPress={handleReset}>
+                  <ButtonWrapper color={detailColor}>
+                    <ResetButtonImage
+                      source={require('../assets/images/detail/reset-icon.png')}
+                    />
+                  </ButtonWrapper>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={handleTimerToggle}>
+                  <ButtonWrapper color={detailColor}>
+                    <StartButtonImage
+                      source={
+                        currentTimer.isRunning
+                          ? require('../assets/images/detail/stop-icon.png')
+                          : require('../assets/images/detail/start-icon.png')
+                      }
+                    />
+                  </ButtonWrapper>
+                </TouchableWithoutFeedback>
+              </ButtonContainer>
+            </ContentContainer>
+            <SwifeContainer>
+              <SwifeButtonImage
+                source={
+                  isSwifeOpen
+                    ? require('../assets/images/detail/swife-arrow-bottom.png')
+                    : require('../assets/images/detail/swife-arrow-top.png')
+                }
+              />
+              <SwifeText weight="semi-bold">
+                스와d이프하여 전체 정보 확인
+              </SwifeText>
+            </SwifeContainer>
           </DetailTimerContainer>
-          
+
           <Animated.View>
             <SwipeContent>
-                <TimeTextProgressContainer>
-                  <TimerText weight="semi-bold">총 남은 시간</TimerText>
-                  <TimerRemainText
-                    weight="bold"
-                  >
-                    {currentTimer
-                      ? `${String(currentTimer.totalTime.minutes).padStart(2, '0')}:${String(currentTimer.totalTime.seconds).padStart(2, '0')}`
-                      : '00:00'}
-                  </TimerRemainText>
-                </TimeTextProgressContainer>
+              <TimeTextProgressContainer>
+                <TimerText weight="semi-bold">총 남은 시간</TimerText>
+                <TimerRemainText weight="bold">
+                  {currentTimer
+                    ? `${String(currentTimer.totalTime.minutes).padStart(
+                        2,
+                        '0',
+                      )}:${String(currentTimer.totalTime.seconds).padStart(
+                        2,
+                        '0',
+                      )}`
+                    : '00:00'}
+                </TimerRemainText>
+              </TimeTextProgressContainer>
               <ProgressIconContainer>
-                <ProgressView 
+                <ProgressView
                   style={{
                     right: 0,
                     width: `${progress * 95}%`,
@@ -192,7 +187,9 @@ const DetailPage = () => {
                     borderBottomRightRadius: scale(13),
                   }}
                 />
-                <ProgressIconImage source={require('../assets/images/detail/progress-icon.png')} />
+                <ProgressIconImage
+                  source={require('../assets/images/detail/progress-icon.png')}
+                />
               </ProgressIconContainer>
               <ProgressLine
                 color={detailColor}
@@ -206,7 +203,6 @@ const DetailPage = () => {
           </Animated.View>
         </Animated.View>
       </GestureDetector>
-
     </DetailLayout>
   );
 };
@@ -219,7 +215,7 @@ const HeaderWrapper = styled.View``;
 
 const DetailTimerContainer = styled(Animated.View)`
   height: 100%;
-`
+`;
 
 const ContentContainer = styled.View`
   height: 90%;
@@ -275,7 +271,7 @@ const SwifeButtonImage = styled.Image`
 `;
 
 const SwifeText = styled(CustomText)`
-  color: #6C7386;
+  color: #6c7386;
   font-size: ${scale(17)}px;
 `;
 
@@ -294,17 +290,16 @@ const TimeTextProgressContainer = styled.View`
   align-items: center;
   margin-bottom: ${scale(10)}px;
   gap: ${scale(5)}px;
-
 `;
 
-const  TimerText= styled(CustomText)`
-  font-size: ${scale(13)}px;  
-  color: #6C7386;
+const TimerText = styled(CustomText)`
+  font-size: ${scale(13)}px;
+  color: #6c7386;
 `;
 
 const TimerRemainText = styled(CustomText)`
-  font-size: ${scale(20)}px;  
-  color: #6C7386;
+  font-size: ${scale(20)}px;
+  color: #6c7386;
 `;
 
 const ProgressIconContainer = styled.View`
@@ -313,14 +308,12 @@ const ProgressIconContainer = styled.View`
   margin-bottom: ${scale(4)}px;
 `;
 
-
 const ProgressIconImage = styled.Image`
   width: ${scale(12)}px;
   height: ${scale(20)}px;
 `;
 
-const ProgressView = styled.View`
-`;
+const ProgressView = styled.View``;
 
 const ProgressLine = styled.View`
   width: ${props => props.width};
@@ -334,7 +327,7 @@ const MemoContainer = styled.View`
   margin-top: ${scale(10)}px;
   width: 100%;
   height: ${scale(200)}px;
-  justify-content:center;
+  justify-content: center;
 `;
 
 const MemoText = styled(CustomText)`
