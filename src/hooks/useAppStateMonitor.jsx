@@ -16,7 +16,7 @@ export const useAppStateMonitor = () => {
         appStateRef.current.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
-        console.log('App has come to the foreground!');
+        // console.log('App has come to the foreground!');
         stopBackgroundTask();
       }
 
@@ -24,7 +24,7 @@ export const useAppStateMonitor = () => {
         appStateRef.current === 'active' &&
         nextAppState.match(/inactive|background/)
       ) {
-        console.log('App has gone to the background!');
+        // console.log('App has gone to the background!');
         startBackgroundTask();
       }
 
