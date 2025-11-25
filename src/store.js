@@ -1,8 +1,7 @@
 import {create} from 'zustand';
+import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
-
-PushNotification.clo;
 
 const useTimerStore = create(set => ({
   timers: {},
