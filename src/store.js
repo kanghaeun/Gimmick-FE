@@ -2,6 +2,7 @@ import {create} from 'zustand';
 import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
+import {calculateTotalSeconds} from './utils/timerUtils';
 
 const useTimerStore = create(set => ({
   timers: {},
@@ -88,11 +89,7 @@ const useTimerStore = create(set => ({
       const timer = state.timers[timerId];
       if (!timer || (timer.isRunning && timer.intervalId)) return state;
 
-      const initialTotalSeconds = timer.detailTimerData.reduce(
-        (total, step) =>
-          total + (parseInt(step.minutes) * 60 + parseInt(step.seconds)),
-        0,
-      );
+      const initialTotalSeconds = calculateTotalSeconds(timer.detailTimerData);
 
       const now = Date.now();
       const startTime = timer.pausedRemaining
@@ -142,10 +139,8 @@ const useTimerStore = create(set => ({
             return state;
           }
 
-          const initialTotalSeconds = currentTimer.detailTimerData.reduce(
-            (total, step) =>
-              total + (parseInt(step.minutes) * 60 + parseInt(step.seconds)),
-            0,
+          const initialTotalSeconds = calculateTotalSeconds(
+            currentTimer.detailTimerData,
           );
 
           const elapsed = Math.floor(
@@ -177,10 +172,8 @@ const useTimerStore = create(set => ({
           if (newRemainingTotalSeconds === 0) {
             clearInterval(intervalId);
 
-            const initialTotalSeconds = currentTimer.detailTimerData.reduce(
-              (total, step) =>
-                total + (parseInt(step.minutes) * 60 + parseInt(step.seconds)),
-              0,
+            const initialTotalSeconds = calculateTotalSeconds(
+              currentTimer.detailTimerData,
             );
 
             return {
@@ -349,10 +342,8 @@ const useTimerStore = create(set => ({
         const timer = updatedTimers[timerId];
 
         if (timer.isRunning && timer.startTime) {
-          const initialTotalSeconds = timer.detailTimerData.reduce(
-            (total, step) =>
-              total + (parseInt(step.minutes) * 60 + parseInt(step.seconds)),
-            0,
+          const initialTotalSeconds = calculateTotalSeconds(
+            timer.detailTimerData,
           );
 
           const elapsed = Math.floor((Date.now() - timer.startTime) / 1000);
