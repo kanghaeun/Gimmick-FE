@@ -96,38 +96,44 @@ const useTimerStore = create(set => ({
         ? now - (initialTotalSeconds - timer.pausedRemaining) * 1000
         : now;
 
+      const elapsedBeforePause = timer.pausedRemaining
+        ? initialTotalSeconds - timer.pausedRemaining
+        : 0;
+
       let accumulatedSeconds = 0;
       timer.detailTimerData.forEach((step, index) => {
         const stepDuration =
           parseInt(step.minutes) * 60 + parseInt(step.seconds);
         accumulatedSeconds += stepDuration;
 
-        const notificationTime = new Date(
-          startTime + accumulatedSeconds * 1000,
-        );
+        if (accumulatedSeconds > elapsedBeforePause) {
+          const notificationTime = new Date(
+            startTime + accumulatedSeconds * 1000,
+          );
 
-        if (Platform.OS === 'ios') {
-          PushNotificationIOS.addNotificationRequest({
-            id: `timer-${timerId}-step-${index}`,
-            title: 'COOKTIME',
-            body: `${timer.timerName}의 ${
-              index + 1
-            }번째 타이머가 완료되었습니다!`,
-            fireDate: notificationTime,
-            sound: 'cook_alarm.mp3',
-          });
-        } else if (Platform.OS === 'android') {
-          PushNotification.localNotificationSchedule({
-            channelId: 'default',
-            id: `timer-${timerId}-step-${index}`,
-            title: 'COOKTIME',
-            message: `${timer.timerName}의 ${
-              index + 1
-            }번째 타이머가 완료되었습니다!`,
-            date: notificationTime,
-            soundName: 'default',
-            allowWhileIdle: true,
-          });
+          if (Platform.OS === 'ios') {
+            PushNotificationIOS.addNotificationRequest({
+              id: `timer-${timerId}-step-${index}`,
+              title: 'COOKTIME',
+              body: `${timer.timerName}의 ${
+                index + 1
+              }번째 타이머가 완료되었습니다!`,
+              fireDate: notificationTime,
+              sound: 'cook_alarm.mp3',
+            });
+          } else if (Platform.OS === 'android') {
+            PushNotification.localNotificationSchedule({
+              channelId: 'default',
+              id: `timer-${timerId}-step-${index}`,
+              title: 'COOKTIME',
+              message: `${timer.timerName}의 ${
+                index + 1
+              }번째 타이머가 완료되었습니다!`,
+              date: notificationTime,
+              soundName: 'default',
+              allowWhileIdle: true,
+            });
+          }
         }
       });
 
