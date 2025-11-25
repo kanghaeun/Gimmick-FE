@@ -74,6 +74,9 @@ const useTimerStore = create(set => ({
               minutes: parseInt(initialMinutes),
               seconds: parseInt(initialSeconds),
             },
+            startTime: null,
+            pausedAt: null,
+            pausedRemaining: null,
           },
         },
       };
