@@ -340,6 +340,64 @@ const useTimerStore = create(set => ({
       };
     });
   },
+
+  syncAllTimers: () => {
+    set(state => {
+      const updatedTimers = {...state.timers};
+
+      Object.keys(updatedTimers).forEach(timerId => {
+        const timer = updatedTimers[timerId];
+
+        if (timer.isRunning && timer.startTime) {
+          const initialTotalSeconds = timer.detailTimerData.reduce(
+            (total, step) =>
+              total + (parseInt(step.minutes) * 60 + parseInt(step.seconds)),
+            0,
+          );
+
+          const elapsed = Math.floor((Date.now() - timer.startTime) / 1000);
+          const newRemainingTotalSeconds = Math.max(
+            initialTotalSeconds - elapsed,
+            0,
+          );
+
+          let accumulatedTime = 0;
+          let currentStepIndex = 0;
+          let currentStepRemaining = 0;
+
+          for (let i = 0; i < timer.detailTimerData.length; i++) {
+            const stepDuration =
+              parseInt(timer.detailTimerData[i].minutes) * 60 +
+              parseInt(timer.detailTimerData[i].seconds);
+
+            if (elapsed < accumulatedTime + stepDuration) {
+              currentStepIndex = i;
+              currentStepRemaining = accumulatedTime + stepDuration - elapsed;
+              break;
+            }
+
+            accumulatedTime += stepDuration;
+          }
+
+          updatedTimers[timerId] = {
+            ...timer,
+            currentStepIndex,
+            time: {
+              minutes: Math.floor(currentStepRemaining / 60),
+              seconds: currentStepRemaining % 60,
+            },
+            remainingTotalSeconds: newRemainingTotalSeconds,
+            totalTime: {
+              minutes: Math.floor(newRemainingTotalSeconds / 60),
+              seconds: newRemainingTotalSeconds % 60,
+            },
+          };
+        }
+      });
+
+      return {timers: updatedTimers};
+    });
+  },
 }));
 
 export default useTimerStore;
