@@ -255,6 +255,18 @@ const useTimerStore = create(set => ({
         clearInterval(timer.intervalId);
       }
 
+      timer.detailTimerData.forEach((_, index) => {
+        if (Platform.OS === 'ios') {
+          PushNotificationIOS.removePendingNotificationRequests([
+            `timer-${timerId}-step-${index}`,
+          ]);
+        } else if (Platform.OS === 'android') {
+          PushNotification.cancelLocalNotification(
+            `timer-${timerId}-step-${index}`,
+          );
+        }
+      });
+
       // 현재 타이머의 상태를 유지하면서 실행만 중지
       return {
         timers: {
@@ -263,6 +275,8 @@ const useTimerStore = create(set => ({
             ...timer,
             isRunning: false,
             intervalId: null,
+            pausedAt: Date.now(),
+            pausedRemaining: timer.remainingTotalSeconds,
             time: timer.time,
             remainingTotalSeconds: timer.remainingTotalSeconds,
             currentStepIndex: timer.currentStepIndex,
