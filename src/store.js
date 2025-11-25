@@ -214,7 +214,7 @@ const useTimerStore = create(set => ({
             },
           };
         });
-      }, 100);
+      }, 1000);
 
       return {
         timers: {
