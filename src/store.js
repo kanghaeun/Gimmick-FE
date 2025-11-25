@@ -293,6 +293,20 @@ const useTimerStore = create(set => ({
         clearInterval(timer.intervalId);
       }
 
+      if (timer?.detailTimerData) {
+        timer.detailTimerData.forEach((_, index) => {
+          if (Platform.OS === 'ios') {
+            PushNotificationIOS.removePendingNotificationRequests([
+              `timer-${timerId}-step-${index}`,
+            ]);
+          } else if (Platform.OS === 'android') {
+            PushNotification.cancelLocalNotification(
+              `timer-${timerId}-step-${index}`,
+            );
+          }
+        });
+      }
+
       const firstStep = timer?.detailTimerData[0] || {
         minutes: initialMinutes,
         seconds: initialSeconds,
@@ -318,6 +332,9 @@ const useTimerStore = create(set => ({
               minutes: parseInt(initialMinutes),
               seconds: parseInt(initialSeconds),
             },
+            startTime: null,
+            pausedAt: null,
+            pausedRemaining: null,
           },
         },
       };
