@@ -2,7 +2,10 @@ import {create} from 'zustand';
 import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
-import {calculateTotalSeconds} from './utils/timerUtils';
+import {
+  calculateTotalSeconds,
+  calculateCurrentStep,
+} from './utils/timerUtils';
 
 const useTimerStore = create(set => ({
   timers: {},
@@ -151,23 +154,10 @@ const useTimerStore = create(set => ({
             0,
           );
 
-          let accumulatedTime = 0;
-          let currentStepIndex = 0;
-          let currentStepRemaining = 0;
-
-          for (let i = 0; i < currentTimer.detailTimerData.length; i++) {
-            const stepDuration =
-              parseInt(currentTimer.detailTimerData[i].minutes) * 60 +
-              parseInt(currentTimer.detailTimerData[i].seconds);
-
-            if (elapsed < accumulatedTime + stepDuration) {
-              currentStepIndex = i;
-              currentStepRemaining = accumulatedTime + stepDuration - elapsed;
-              break;
-            }
-
-            accumulatedTime += stepDuration;
-          }
+          const {currentStepIndex, currentStepRemaining} = calculateCurrentStep(
+            currentTimer.detailTimerData,
+            elapsed,
+          );
 
           if (newRemainingTotalSeconds === 0) {
             clearInterval(intervalId);
@@ -352,23 +342,10 @@ const useTimerStore = create(set => ({
             0,
           );
 
-          let accumulatedTime = 0;
-          let currentStepIndex = 0;
-          let currentStepRemaining = 0;
-
-          for (let i = 0; i < timer.detailTimerData.length; i++) {
-            const stepDuration =
-              parseInt(timer.detailTimerData[i].minutes) * 60 +
-              parseInt(timer.detailTimerData[i].seconds);
-
-            if (elapsed < accumulatedTime + stepDuration) {
-              currentStepIndex = i;
-              currentStepRemaining = accumulatedTime + stepDuration - elapsed;
-              break;
-            }
-
-            accumulatedTime += stepDuration;
-          }
+          const {currentStepIndex, currentStepRemaining} = calculateCurrentStep(
+            timer.detailTimerData,
+            elapsed,
+          );
 
           updatedTimers[timerId] = {
             ...timer,
