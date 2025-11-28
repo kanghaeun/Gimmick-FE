@@ -57,7 +57,7 @@ const TimerView = ({item, isFolder, onTimerClick, onFolderClick}) => {
         ) : (
           <TimerContextMenu timer={item}>
             <DeleteModeAnimateView>
-              <CountdownTimer timer={item} onTimerClick={onTimerClick} />
+              <CountdownTimer timer={item} />
             </DeleteModeAnimateView>
           </TimerContextMenu>
         )}
