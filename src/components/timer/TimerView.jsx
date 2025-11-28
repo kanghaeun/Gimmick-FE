@@ -46,16 +46,17 @@ const TimerView = ({item, isFolder, onTimerClick, onFolderClick}) => {
       <Pressable
         onPress={handlePress}
         onLongPress={() => {}}
-        delayLongPress={200}>
+        delayLongPress={200}
+        style={{overflow: 'visible', zIndex: 999}}>
         {isFolder ? (
           <FolderContextMenu folder={item}>
-            <DeleteModeAnimateView style={{zIndex: 1, backgroundColor: 'red'}}>
+            <DeleteModeAnimateView>
               <CountdownFolder folder={item} onFolderClick={onFolderClick} />
             </DeleteModeAnimateView>
           </FolderContextMenu>
         ) : (
           <TimerContextMenu timer={item}>
-            <DeleteModeAnimateView style={{zIndex: 1, backgroundColor: 'red'}}>
+            <DeleteModeAnimateView>
               <CountdownTimer timer={item} onTimerClick={onTimerClick} />
             </DeleteModeAnimateView>
           </TimerContextMenu>
@@ -68,10 +69,12 @@ const TimerView = ({item, isFolder, onTimerClick, onFolderClick}) => {
 export default TimerView;
 
 const TimerViewContainer = styled.View`
-  z-index: 1;
+  z-index: 999;
   position: relative;
+  overflow: visible;
 `;
 
 const DeleteButtonWrapper = styled.View`
   ${props => props.isFolder && `top: ${scale(15)}px;`}
+  z-index: 1000;
 `;
